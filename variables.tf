@@ -3,12 +3,13 @@ variable "region" {
   default = "us-east1"
 }
 
-variable "data-node-count" {
-  default = "2"
-}
-
-variable "meta-node-count" {
-  default = "3"
+variable "zone" {
+  type = "map"
+  default = {
+    "a" = "a"
+    "b" = "b"
+    "c" = "c"
+  }
 }
 
 variable "project-name" {
@@ -36,21 +37,4 @@ variable "os" {
   default = {
     "debian9" = "debian-cloud/debian-9"
   }
-}
-
-variable "data-node-firewall" {
-  type    = "string"
-  default = "influxdb-data-node-firewall"
-}
-
-variable "data-node-source-ranges" {
-  type = "list"
-  default = [
-    "10.0.0.0/8",
-    "172.16.0.0/12",
-    "192.168.0.0/16",
-    "130.211.0.0/22",
-    "35.191.0.0/16",
-    "71.197.161.176/32"
-  ]
 }
