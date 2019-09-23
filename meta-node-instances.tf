@@ -29,9 +29,9 @@ sudo dpkg -i influxdb-meta_1.7.8-c1.7.8_amd64.deb
 
 sudo sed -i 's/# hostname = ""/hostname = \"'`hostname`'\"/' /etc/influxdb/influxdb-meta.conf
 
-sudo sed -i 's/# internal-shared-secret = ""/internal-shared-secret = "<SHARED SECRET>"/' /etc/influxdb/influxdb-meta.conf
+sudo sed -i 's/# internal-shared-secret = ""/internal-shared-secret = "<SHARED_SECRET>"/' /etc/influxdb/influxdb-meta.conf
 
-sudo sed -i 's/license-key = \"\"/license-key = "<LICENSE KEY>"/' /etc/influxdb/influxdb-meta.conf
+sudo sed -i 's/license-key = \"\"/license-key = "<LICENSE_KEY>"/' /etc/influxdb/influxdb-meta.conf
 
 SCRIPT
 }

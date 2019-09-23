@@ -43,6 +43,7 @@ resource "google_compute_instance_from_template" "data-node-instance" {
   name                     = "${var.data-node-name-prefix}${count.index + 1}"
   zone                     = "${var.region}-${var.zone.b}"
   source_instance_template = "${google_compute_instance_template.data-node-template.self_link}"
+  tags                     = ["${var.data-node-firewall}"]
 
   attached_disk {
     source = "${google_compute_disk.ssd-disk.*.self_link[count.index]}"
@@ -55,12 +56,13 @@ sudo dpkg -i influxdb-data_1.7.8-c1.7.8_amd64.deb
 
 sudo sed -i 's/# hostname = "localhost"/hostname = \"'`hostname`'\"/' /etc/influxdb/influxdb.conf
 
-sudo sed -i 's/license-key = \"\"/license-key = "<LICENSE KEY>"/' /etc/influxdb/influxdb.conf
+sudo sed -i 's/license-key = \"\"/license-key = "<LICENSE_KEY>"/' /etc/influxdb/influxdb.conf
 
 sudo sed -i 's/# meta-auth-enabled = false/meta-auth-enabled = true/' /etc/influxdb/influxdb.conf
+sudo sed -i 's/# meta-internal-shared-secret = ""/meta-internal-shared-secret = "<SHARED_SECRET>"/' /etc/influxdb/influxdb.conf
 
-sudo sed -i 's/# meta-internal-shared-secret = ""/meta-internal-shared-secret = "<SHARED SECRET>"/' /etc/influxdb/influxdb.conf
-
+sudo sed -i 's/# enabled = true/enabled = true/' /etc/influxdb/influxdb.conf
+sudo sed -i 's/# bind-address = \":8086\"/bind-address = ":8086"/' /etc/influxdb/influxdb.conf
 sudo sed -i 's/# auth-enabled = false/auth-enabled = false/' /etc/influxdb/influxdb.conf
 
 SCRIPT
